@@ -1,52 +1,17 @@
-import { useState,useEffect } from "react"
+import { PostsForm } from "./components/PostsForm"
 
 
 function App() {
- const [posts, setPosts] = useState([]);
- const [post, setPost] = useState("");
-
- useEffect(()=>{
-  console.log("componente cargado")
- },[posts]);
-
- const handleSubmitPost = (e) => {
-  e.preventDefault();
-
-  if(post){
-    //subir post al arreglo
-    setPosts([...posts,post]);
-    setPost("");
-  }
- };
-
- const handleInputChange = (event ) => {
-  setPost(event.target.value);
- };
-
- const handleDeletePost = (index) => {
-  const newPosts = posts.filter((_,i)=> i !== index)
-  setPosts(newPosts);
- };
 
   return (
     <>
-    <h1>clon twitter</h1>
-    <form onSubmit={handleSubmitPost}>
-      <input type="text" 
-      placeholder="Escribre algo" 
-      value={post}
-      onChange={handleInputChange}/>
-      <input type="submit" value={"Postear"}/>
-    </form>
-    <p>Actual post: {post}</p>
-    <section>
-    {posts.map((item,index)=>(
-      <div key={index}>
-        <p>{item}</p>
-        <button onClick={()=>handleDeletePost(index)}>Borrar</button>
-      </div>
-    ))}
-    </section>
+    <div className="h-screen text-2xl border-x border-gray-500 w-2/5">
+    <section className="flex w-full text-lg border-b border-gray-500">
+      <div className="w-1/2 p-2 flex  font-bold justify-center hover:bg-neutral-900">For you</div>
+      <div className="w-1/2 p-2  font-bold flex justify-center hover:bg-neutral-900">following</div>
+    </section> 
+    <PostsForm/>
+    </div>
     </>
   )
 }
